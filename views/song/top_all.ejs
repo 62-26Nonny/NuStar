@@ -1,0 +1,28 @@
+<%- include('../partials/top_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid top_header">
+        <div class="top_desc">
+            <h2 class="top_name">Popular songs</h2>
+        </div>
+    </div>
+
+    <!-- SONG -->
+    <div class="container-fluid content_wrapper">
+        <div class="top_song_container">
+            <% topSongs.forEach(song => { %>
+                <div class="top_song">
+                    <div class="top_song_img">
+                        <img src="<%= song.cover %>" alt="song_img">
+                    </div>
+                    <a href="/song/<%= song._id %>" class="top_song_name"><%= song.name %></a>
+                    <a href="/song/<%= song.artist._id %>" class="top_song_artist"><%= song.artist.name %></a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

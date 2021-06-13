@@ -1,0 +1,149 @@
+<%- include('partials/user_rel.ejs') %>
+<%- include('partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container user_container">
+
+        <!-- USER PROFILE -->
+        <div class="user_profile_container">
+            <div class="user_profile">
+                <div class="user_img_container">
+                    <% if(user.image != ""){ %>
+                        <img src="<%= user.image %>" alt="user_img" class="user_img">
+                    <% } else { %>
+                        <img src="/IMG/user_icon.png" alt="user_img" class="user_img">
+                    <% } %>
+                </div>
+                <div class="user_detail_container">
+                    <div class="user_rank_container">
+                        <img src="/IMG/favorite_icon.png" alt="rank_icon" class="user_rank_img">
+                        <p class="user_rank_number"><%= user.NuRank %></p>
+                    </div>
+                    <p class="user_name"><%= user.username %></p>
+                    <p class="user_rank">NuRank: <%= user.NuRank %> stars</p>
+                </div>
+            </div>
+
+            <!-- NAV -->
+            <div class="user_nav_container menus">
+                <a href="#favorite" class="user_nav selected">My Favorite</a>
+                <a href="#playlist" class="user_nav">My playlist</a>
+            </div>
+            <% if(currentUser && currentUser.privilage == "Admin"){ %>
+                <a href="/admin/song_management/song">
+                    <button class="admin_button">Admin mode</button>
+                </a>
+            <% } %>
+            <div id="open">
+                <button class="setting_icon">Edit profile</button>
+            </div>
+            <a href="/sign_out">
+                <button class="sign_out_button">Sign out</button>
+            </a>
+        </div>
+
+        <!-- FAVORITE -->
+        <div id="favorite" class="favorite_song_container current_active">
+            <h2 class="favorite_song_header">Favorite</h2>
+            <div class="favorite_song_wrapper">
+                <% if(user.favorites.length > 0){ %>
+                    <% user.favorites.forEach(song => { %>
+                        <a href="/song/<%= song._id %>" class="favorite_song_link">
+                            <div class="favorite_song">
+                                <div class="favorite_song_img">
+                                    <img src="<%= song.cover %>" alt="song_img">
+                                </div>
+                                <div class="favorite_song_desc">
+                                    <p class="song_name"><%= song.name %></p>
+                                    <p class="song_artist"><%= song.artist.name %></p>
+                                </div>
+                            </div>
+                        </a>
+                    <% }) %>
+                <% } else { %>
+                    <p>You not have favorite songs</p>
+                <% } %>
+            </div>
+        </div>
+
+        <!-- PLAYLIST -->
+        <div id="playlist" class="playlist_container">
+            <h2 class="favorite_song_header">Playlist</h2>
+            <div class="playlists">
+                <div id="open_button" class="playlist_add_icon">
+                    <div class="playlist_add_img">
+                        <img src="/IMG/add_button.png" alt="playlist_img">
+                    </div>
+                    <div class="playlist_add_desc">
+                        <p>Add playlist</p>
+                    </div>
+                </div>
+                <% user.playlists.forEach(playlist => { %>
+                    <a href="/user/playlist/<%= playlist._id %>" class="playlist_link">
+                        <div class="playlist">
+                            <div class="playlist_img">
+                                <% if(playlist.songs.length == 0){ %>
+                                    <img src="/IMG/logo.png" alt="playlist_img">
+                                <% } else { %>
+                                    <img src="<%= playlist.songs[0].cover %>" alt="playlist_img">
+                                <% } %>
+                            </div>
+                            <div class="playlist_desc">
+                                <p class="playlist_name"><%= playlist.name %></p>
+                                <% if(playlist.songs.length > 1){ %>
+                                    <p class="playlist_total_song"><%= playlist.songs.length %> songs</p>
+                                <% } else { %>
+                                    <p class="playlist_total_song"><%= playlist.songs.length %> song</p>
+                                <% } %>
+                            </div>
+                        </div>
+                    </a>
+                <% }) %>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="form" class="hidden_container">
+    <div>
+        <button id="cancel_button" class="cancel_icon"><img src="/IMG/x_icon.png" alt="cancel_icon"></button>
+        <h2>Create playlist</h2>
+        <form action="/playlist/new" method="POST" class="playlist_form">
+            <label>Name</label>
+            <input type="text" name="playlistName" class="input_form">
+            <button type="submit" class="create_button" name="userId" value="<%= user._id %>">Create<br>
+        </form>
+    </div>
+</div>
+
+<div id="profile_form" class="hidden_container">
+    <div>
+        <button id="cancel" class="cancel_icon"><img src="/IMG/x_icon.png" alt="cancel_icon"></button>
+        <h2>Edit profile</h2>
+        <form action="/user/update_profile" method="POST" class="profile_form">
+            <label>Profile image</label>
+            <% if(currentUser.image.length > 0){ %>
+                <div id="img_frame" class="profile_img">
+                    <img src="<%= currentUser.image %>" alt="user_img">
+                </div>
+                <textarea id="userImage" name="userImage" value="<%= currentUser.image %>"></textarea>
+            <% } else { %>
+                <div id="img_frame" class="profile_img">
+                    <img src="/IMG/user_icon.png" alt="user_img">
+                </div>
+                <textarea id="userImage" name="userImage"></textarea>
+            <% } %>
+            <input type="file" accept="image/*" class="insert_file userImage profile_form insert_img input_form"><br>
+            <label>Username</label>
+            <input type="text" name="username" class="input_form" value="<%= currentUser.username %>"><br>
+            <label>Email</label>
+            <input type="email" name="email" class="input_form" value="<%= currentUser.email %>"><br>
+            <button type="submit" class="create_button" name="userId" value="<%= user._id %>">Update<br>
+        </form>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
+

@@ -1,0 +1,35 @@
+.footer {
+    min-width: 985px;
+    background-color: var(--ft-primary);
+    padding: 1% 5%;
+    display: flex;
+    margin-top: auto;
+}
+.footer_topic_container {
+    columns: 3;
+    column-gap: 10%;
+    width: fit-content;
+    list-style: none;
+    margin-top: 1%;
+    margin-left: 15%;
+}
+.footer_topic {
+    font-size: 20px;
+}
+.footer_sub_topic {
+    list-style: none;
+}
+.footer_sub_topic a {
+    text-decoration: none;
+    color: white;
+}
+.footer_sub_topic a:hover {
+    color: rgb(82, 82, 82);
+}
+
+@media screen and (max-width: 720px){
+    .footer_topic {
+        columns: 1;
+    }
+}
+        

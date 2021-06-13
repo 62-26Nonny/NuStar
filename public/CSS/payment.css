@@ -1,0 +1,100 @@
+:root {
+    --bg-primary: #5A5A5A;
+    --bg-accent: #252525;
+    --hd-primary: #000000;
+    --ft-primary: #727070;
+    --clr-primary: #FFFFFF;
+    font-size: 16px;
+}
+
+/*  =========
+       BODY 
+    ========= */
+* {
+    box-sizing: border-box;
+    color: var(--clr-primary);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0, 0, 97, 0.7) 50%, rgba(0,0,0,1) 100%), url(/IMG/payment_bg.jpg);
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 100%;
+}
+
+/*  =================
+      ITEM CONTAINER 
+    ================= */
+
+
+.weblogo {
+    display: flex;
+    justify-content: center;
+}
+.web_img {
+    width: 10%;
+    height: auto;
+}
+.web_img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.web_name {
+    height: fit-content;
+    margin-top: 4rem;
+    font-size: 3rem;
+    font-weight: 700;
+}
+.payment_header {
+    text-align: center;
+}
+.order {
+    width: 40%;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: grey;
+}
+.payment {
+    width: 50%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+.payment_form div {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.payment_form div div{
+    flex-basis: 30%;
+}
+.payment_form label {
+    margin-top: 10px;
+}
+.payment_form button {
+    border: none;
+    border-radius: 10px;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    background-color: black;
+}
+.payment_input {
+    width: 100%;
+    color: black;
+}

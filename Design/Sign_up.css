@@ -1,0 +1,66 @@
+:root {
+    --clr-primary: #ffffff;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 50%), url(IMG/sign_up_background.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* WEB DETAIL */
+
+* {
+    color: var(--clr-primary);
+}
+.container {
+    margin-top: 10%;
+}
+.row {
+    display: flex;
+    align-items: center;
+}
+.web_detail_header, .web_detail_text {
+    text-align: center;
+}
+
+/* WEB FORM */
+
+.web_form {
+    text-align: center;
+}
+.webname, .sign_up_text {
+    margin: 0;
+}
+.sign_up_form {
+    min-width: 480px;
+    text-align: right;
+}
+.sign_up_input {
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 25%;
+    width: 30%;
+    border: none;
+    border-radius: 5px;
+}
+.sign_up_button, .sign_with_fb, .sign_with_ln {
+    border: none;
+    border-radius: 20px;
+    padding: 3px 15px;
+    display: block;
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sign_up_button {
+    background: linear-gradient(275deg, rgba(0,212,255,1) 0%, rgba(0,0,255,1) 95%);
+}
+.sign_with_fb {
+    background: linear-gradient(90deg, rgba(17,0,60,1) 0%, rgba(0,29,207,1) 100%);
+}
+.sign_with_ln {
+    background: linear-gradient(90deg, rgba(1,98,27,1) 0%, rgba(0,207,51,1) 100%);
+}

@@ -1,0 +1,27 @@
+<%- include('../partials/artist_all_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid artist_header">
+        <div class="artist_desc">
+            <h2 class="artist_name">Popular artists</h2>
+        </div>
+    </div>
+
+    <!-- ARTIST -->
+    <div class="container-fluid content_wrapper">
+        <div class="artist_song_container">
+            <% artists.forEach(artist => { %>
+                <div class="artist_song">
+                    <div class="artist_song_img">
+                        <img src="<%= artist.image %>" alt="song_img">
+                    </div>
+                    <a href="/artist/<%= artist._id %>" class="artist_song_name"><%= artist.name %></a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

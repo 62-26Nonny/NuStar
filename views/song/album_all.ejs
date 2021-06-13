@@ -1,0 +1,27 @@
+<%- include('../partials/album_all_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid album_header">
+        <div class="album_desc">
+            <h2 class="album_name">Latest albums</h2>
+        </div>
+    </div>
+
+    <!-- SONG -->
+    <div class="container-fluid content_wrapper">
+        <div class="album_song_container">
+            <% albums.forEach(album => { %>
+                <div class="album_song">
+                    <div class="album_song_img">
+                        <img src="<%= album.cover %>" alt="song_img">
+                    </div>
+                    <a href="/album/<%= album._id %>" class="album_song_name"><%= album.name %></a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,31 @@
+<%- include('../partials/playlist_all_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid playlist_header">
+        <div class="playlist_desc">
+            <h2 class="playlist_name">Latest playlists</h2>
+        </div>
+    </div>
+
+    <!-- SONG -->
+    <div class="container-fluid content_wrapper">
+        <div class="playlist_song_container">
+            <% playlists.forEach(playlist => { %>
+                <div class="playlist_song">
+                    <div class="playlist_song_img">
+                        <% if(playlist.songs.length == 0){ %>
+                            <img src="/IMG/logo.png" alt="song_img">
+                        <% } else { %>
+                            <img src="<%= playlist.songs[0].cover %>" alt="song_img">
+                        <% } %>
+                    </div>
+                    <a href="/playlist/<%= playlist._id %>" class="playlist_song_name"><%= playlist.name %></a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

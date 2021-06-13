@@ -1,0 +1,142 @@
+<%- include('../partials/admin_rel.ejs') %>
+<!-- HEADER -->
+<header class="container-fluid header">
+
+    <!-- LOGO -->
+    <div class="logo_wrapper">
+        <img src="/IMG/logo.png" alt="logo_img" class="logo_img">
+        <p class="logo_name">NuStar</p>
+    </div>
+
+</header>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container admin_container">
+
+        <!-- PROFILE -->
+        <div class="admin_profile_container">
+            <div class="admin_profile">
+                <div class="admin_img_container">
+                    <% if(currentUser.image != ""){ %>
+                        <img src="<%= currentUser.image %>" alt="admin_img" class="admin_img">
+                    <% } else { %>
+                        <img src="/IMG/user_icon.png" alt="admin_img" class="admin_img">
+                    <% } %>
+                </div>
+                <p class="admin_name"><%= user.username %></p>
+            </div>
+            <div class="admin_nav_container">
+                <a href="/admin/song_management/song" class="admin_nav">Song management</a>
+                <a href="/admin/user_management" class="admin_nav">User management</a>
+            </div>
+            <a href="/user">
+                <button class="user_button">User mode</button>
+            </a>
+            <a href="/sign_out">
+                <button class="sign_out_button">Sign out</button>
+            </a>
+        </div>
+
+        <!-- MANAGEMENT -->
+        <div class="container-fluid management_container">
+            <h2 class="manage_header">Song Management</h2>
+
+            <!-- MANAGEMENT MENUS -->
+            <div class="manage_menus menus">
+                <a href="/admin/song_management/song" class="manage_menu">Songs</a>
+                <a href="/admin/song_management/artist" class="manage_menu">Artists</a>
+                <a href="/admin/song_management/album" class="manage_menu selected">Albums</a>
+                <a href="/admin/song_management/category" class="manage_menu">Categories</a>
+            </div>
+
+            <!-- ALBUM MANAGEMENT -->
+            <div id="album" class="album_manage_container">
+
+                <!-- ALBUM TABLE -->
+                <div id="album_table" class="table_wrapper display">
+
+                    <!-- SEARCH BAR -->
+                    <form action="/admin/search?BackURL=/admin/song_management/album" method="POST" class="search_form">
+                        <label class="search_label">Search</label>
+                        <% if(keyword != ""){ %>
+                            <input type="text" placeholder="type album name" name="keyword" class="search_input" value="<%= keyword %>">
+                        <% } else { %>
+                            <input type="text" placeholder="type album name" name="keyword" class="search_input">
+                        <% } %>
+                        <input type="submit" value="Search" class="search_button">
+                    </form>
+
+                    <!-- SORT MENUS -->
+                    <div class="sort_container">
+                        <form action="/admin/sort?BackURL=/admin/song_management/album" method="POST" class="sort_form">
+                            <h4 class="sort_header">Sort</h4>
+                            <input type="text" name="keyword" class="hidden" value="<%= keyword %>">
+                            <button type="submit" name="sort" value="1" class="sort_icon">
+                                <img src="/IMG/alpha_sort_asce.png" alt="sort_icon">
+                            </button>
+                            <button type="submit" name="sort" value="-1" class="sort_icon">
+                                <img src="/IMG/alpha_sort_desc.png" alt="sort_icon">
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <table class="table">
+                        <tr>
+                            <th>Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <% albums.forEach(album => { %>
+                            <tr id="<%= album._id %>">
+                                <td><%= album.name %></td>
+                                <input type="text" class="hidden file<%= album._id %>" value="<%= album.cover %>">
+                                <td class="button"><button class="edit_button album_form album_table" value="<%= album._id %>">Edit</button></td>
+                                <td class="button">
+                                    <button id="open_button" class="del_button" value="<%= album._id %>">Delete</button>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                    <button class="add_button album_form album_table">Add album</button>
+                </div>
+
+                <!-- ALBUM FORM -->
+                <div id="album_form" class="manage_form">
+                    <button class="back_button"></button>
+                    <div id="img_frame" class="insert_img_container">
+                        <img src="/IMG/image_icon.png" alt="insert_img">
+                    </div>
+                    <form action="/admin/album/update" method="POST" class="insert_form">
+
+                        <!-- ALBUM NAME -->
+                        <label class="insert_label">Album name</label>
+                        <input type="text" class="insert_input albumName" name="albumName" required><br>
+
+                        <!-- COVER -->
+                        <label class="insert_label">Cover</label>
+                        <input type="file" accept="image/*" class="insert_file albumCover album_form insert_img" required><br>
+                        <textarea id="albumCover" name="albumCover"></textarea>
+
+                        <!-- SUBMIT -->
+                        <button type="submit" class="insert_button" name="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="form" class="form">
+    <div class="form_content">
+        <h2>Warning</h2>
+        <h4>are you sure to delete this album?</h4>
+        <div class="form_wrapper">
+            <form id="del_form" action="/admin/album/" method="POST">
+                <button type="submit" class="confirm_button">confirm</button>
+            </form>
+            <button id="cancel_button" class="cancel_button">cancel</button>
+        </div>
+    </div>
+</div>
+</body>

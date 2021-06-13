@@ -1,0 +1,411 @@
+:root {
+    --bg-primary: #5A5A5A;
+    --bg-accent: #252525;
+    --hd-primary: #000000;
+    --ft-primary: #727070;
+    --clr-primary: #FFFFFF;
+    font-size: 16px;
+}
+
+/*  =========
+       BODY 
+    ========= */
+* {
+    box-sizing: border-box;
+    color: var(--clr-primary);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(90, 90, 90, 0.9), rgba(90, 90, 90, 0.9)), url(/IMG/main_background.jpg);
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-height: 100%;
+}
+
+/*  =================
+      ITEM CONTAINER 
+    ================= */   
+
+/* CAROUSEL */
+.carousel {
+    width: 100%;
+    min-width: 985px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    background-color: grey;
+}
+@media screen and (max-width: 1400px) {
+    .carousel {
+        display: none;
+    }
+}
+
+.carousel_track_container {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel_track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    height: 100%;
+    transition: transform 250ms ease-in;
+}
+
+.carousel_slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    padding: 0;
+    margin: 0;
+}
+
+.carousel_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel_left_button, .carousel_right_button {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    border: none;
+    width: 15%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    z-index: 1000;
+    transition: 0.5s;
+}
+
+.carousel_left_button {
+    background-image: url("/IMG/carousel_left_button.png");
+    left: 25px;
+}
+.carousel_left_button:hover {
+    background-image: url("/IMG/carousel_left_button_hover.png");
+}
+
+.carousel_right_button {
+    background-image: url("/IMG/carousel_right_button.png");
+    right: 25px;
+}
+.carousel_right_button:hover {
+    background-image: url("/IMG/carousel_right_button_hover.png");
+}
+
+/* MAIN CONTENT */
+.content_wrapper {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* TOP SONG */
+.popular_song_header {
+    width: fit-content;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+.popular_song_header:hover .popular_song_text_decoration {
+    width: 100%;
+}
+.popular_song_text {
+    font-size: 3.5vmin;
+}
+.popular_song_text_decoration {
+    width: 0%;
+    height: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(275deg, rgba(0,212,255,1) 0%, rgba(0,0,255,1) 95%);
+    transition: 0.3s;
+}
+.popular_song_track_container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.popular_song_track {
+    flex-basis: 30%;
+    display: flex;
+}
+
+@media screen and (max-width: 800px) {
+    .popular_song_track {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+}
+
+.popular_song_wrapper {
+    display: flex;
+    flex-basis: 100%;
+    margin: 0 auto;
+}
+
+.popular_song_img_container {
+    width: 40%;
+    height: 100%;
+}
+.popular_song_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+}
+.popular_song {
+    background-color: black;
+    width: 60%;
+    margin: 0;
+    padding: 15px 20px;
+    border-radius: 0px 10px 10px 0px;
+    list-style: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.popular_song_name {
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--clr-primary);  
+}
+.popular_song_link_container {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.popular_song_artist {
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--clr-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ALBUM */
+.album_header {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 20px;
+    text-decoration: none;
+}
+.album_header:hover .album_text_decoration {
+    width: 100%;
+}
+.album_text {
+    font-size: 3.5vmin;
+}
+.album_text_decoration {
+    width: 0%;
+    height: 10px;
+    background: linear-gradient(275deg, rgba(0,212,255,1) 0%, rgba(0,0,255,1) 95%);
+    transition: 0.3s;
+}
+.album_list_container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* background-color: yellow; */
+}
+.album_container {
+    width: 20%;
+    padding: 0;
+    text-align: center;
+    /* background-color:grey; */
+}
+
+@media screen and (max-width: 800px) {
+    .album_container {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+}
+
+.album {
+    width: 100%;
+    display: flex;
+    padding: 0%;
+    position: relative;
+    /* background-color: grey; */
+}
+.album_img_container {
+    width: 60%;
+    position: relative;
+    z-index: 1000;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 250ms ease-in;
+}
+.album_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.album_list {
+    position: absolute;
+    font-size: 18px;
+    width: 65%;
+    height: 100%;
+    left: 20%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 0px 10px 10px 0px;
+    transition: 250ms ease-in;
+    background-color: black;
+    overflow: hidden;
+}
+.album_list_song {
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+.album_name {
+    font-size: 2.5vmin;
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+
+
+/* ARTIST */
+.artist_header {
+    width: fit-content;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+}
+.artist_header:hover .artist_text_decoration {
+    width: 100%;
+}
+.artist_text {
+    font-size: 3.5vmin;
+}
+.artist_text_decoration {
+    width: 0%;
+    height: 10px;
+    background: linear-gradient(275deg, rgba(0,212,255,1) 0%, rgba(0,0,255,1) 95%);
+    transition: 0.3s;
+}
+.artist_container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.artist {
+    flex-basis: 25%;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.artist:hover p{
+    color: rgb(36, 79, 196);
+}
+.artist_name {
+    font-size: 2.5vmin;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.artist_img_container {
+    width: 50%;
+    height: 70%;
+    margin-bottom: 0px;
+}
+.artist_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* CATEGORY */
+.category_header {
+    width: fit-content;
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+}
+.category_header:hover .category_text_decoration {
+    width: 100%;
+}
+.category_text {
+    font-size: 3.5vmin;
+}
+.category_text_decoration {
+    width: 0%;
+    height: 10px;
+    background: linear-gradient(275deg, rgba(0,212,255,1) 0%, rgba(0,0,255,1) 95%);
+    transition: 0.3s;
+}
+.category_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.category {
+    background-color: black;
+    width: 20%;
+    max-width: 175px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease-in;
+    /* background-color: seagreen; */
+}
+.category:hover {
+    background-color: black;
+}
+.category:hover .category_name {
+    color: rgb(53, 101, 233);
+    font-size: 4.5vmin;
+}
+.category:hover .category_img_container {
+    opacity: 0.3;
+}
+.category_name {
+    font-size: 2.75vmin;
+    position: absolute;
+    font-variant: normal;
+    font-weight: bold;
+    transition: 0.2s ease-in;
+    z-index: 1;
+}
+.category_img_container {
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    transition: 0.25s ease-in;
+}
+.category_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

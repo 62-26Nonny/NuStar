@@ -1,0 +1,51 @@
+<%- include('partials/member_rel.ejs') %>
+<%- include('partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <h1 class="membership_header">NuStar member</h1>
+    <h4 class="membership_sub_header">Register membership</h4>
+    <br><br>
+    <p class="membership_desc">Start membership now for downloadable music, high quality audio player, over 600 premium song
+    and more.<br>Start now for free trail 30 days</p>
+    <br><br>
+    <div class="promotion_wrapper">
+        <a href="/user/payment?order=Free Trail&order_price=Free" class="promotion_link">
+            <div class="promotion">
+                <h4 class="promotion_header">Free Trail 30 days</h4>
+                <ul>
+                    <li class="promotion_desc">Personal playlists</li>
+                    <li class="promotion_desc">Favorites songs</li>
+                </ul>
+                <h2 class="promotion_price">Free<br>1st time only</h2>
+            </div>
+        </a>
+        <a href="/user/payment?order=Mouthly&order_price=1.99$" class="promotion_link">
+            <div class="promotion">
+                <h4 class="promotion_header">Mouthly</h4>
+                <ul>
+                    <li class="promotion_desc">Personal playlists</li>
+                    <li class="promotion_desc">Favorites songs</li>
+                    <li class="promotion_desc">Downloadable songs</li>
+                    <li class="promotion_desc">+1 NuRank</li>
+                </ul>
+                <h2 class="promotion_price">1.99 $</h2>
+            </div>
+        </a>
+        <a href="/user/payment?order=Yearly&order_price=12.99$" class="promotion_link">
+            <div class="promotion">
+                <h4 class="promotion_header">Yearly</h4>
+                <ul>
+                    <li class="promotion_desc">Personal playlists</li>
+                    <li class="promotion_desc">Favorites songs</li>
+                    <li class="promotion_desc">Downloadable songs</li>
+                    <li class="promotion_desc">+20 NuRank</li>
+                </ul>
+                <h2 class="promotion_price">12.99 $</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<%- include('partials/footer.ejs') %>

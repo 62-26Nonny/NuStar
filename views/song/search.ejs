@@ -1,0 +1,196 @@
+<%- include('../partials/search_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="container content_container">
+
+    <!-- SEARCH MENUS -->
+    <div class="search_menus_container menus">
+        <a href="#all" class="search_menu selected">All</a>
+        <a href="#song" class="search_menu">Song</a>
+        <a href="#album" class="search_menu">Album</a>
+        <a href="#artist" class="search_menu">Artist</a>
+    </div>
+
+    <!-- SORT MENUS -->
+    <div class="sort_container">
+        <form action="/song/search/sort" method="POST" class="sort_form">
+            <h3 class="sort_header">Sort</h3>
+            <input type="text" name="search" class="hidden" value="<%= keyword %>">
+            <button type="submit" name="sort" value="1" class="sort_icon">
+                <img src="/IMG/alpha_sort_asce.png" alt="sort_icon">
+            </button>
+            <button type="submit" name="sort" value="-1" class="sort_icon">
+                <img src="/IMG/alpha_sort_desc.png" alt="sort_icon">
+            </button>
+        </form>
+    </div>
+
+    <div class="search_type_wrapper">
+
+        <!-- SEARCH ALL -->
+        <div id="all" class="search_type_all current_active">
+
+            <!-- SEARCH ALL SONG -->
+            <div class="search_song_container">
+                <h2 class="search_song_header">Song</h2>
+                <% if(songs.length > 0){ %>
+                    <% songs.forEach((song, index) => { %>
+                        <div class="search_song">
+                            <a href="/song/<%= song._id %>" class="search_song_name"><%= index + 1 %> <%= song.name %></a>
+                            <a href="/artist/<%= song.artist._id %>" class="search_song_artist"><%= song.artist.name %></a>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>There is no match searching</p>
+                <% } %>
+            </div>
+
+            <div class="search_side_container">
+
+                <!-- SEARCH ALL ALBUM -->
+                <div class="search_album_container">
+                    <h2 class="search_album_header">Album</h2>
+                    <% if(albums.length < 3){ %>
+                        <% albums.forEach(album => { %>
+                            <div class="search_album">
+                                <div class="search_album_img_container">
+                                    <img src="<%= album.cover %>" alt="album_img" class="search_album_img">
+                                </div>
+                                <a href="/playlist/<%= album._id %>" class="search_album_name"><%= album.name %></a>
+                            </div>
+                        <% }) %>
+                    <% } else if(albums.length > 3){ %>
+                        <div class="search_album">
+                            <div class="search_album_img_container">
+                                <img src="<%= albums[0].cover %>" alt="album_img" class="search_album_img">
+                            </div>
+                            <a href="/playlist/<%= albums[0]._id %>" class="search_album_name"><%= albums[0].name %></a>
+                        </div>
+                        <div class="search_album">
+                            <div class="search_album_img_container">
+                                <img src="<%= albums[1].cover %>" alt="album_img" class="search_album_img">
+                            </div>
+                            <a href="/playlist/<%= albums[1]._id %>" class="search_album_name"><%= albums[1].name %></a>
+                        </div>
+                        <div class="search_album">
+                            <div class="search_album_img_container">
+                                <img src="<%= albums[2].cover %>" alt="album_img" class="search_album_img">
+                            </div>
+                            <a href="/playlist/<%= albums[2]._id %>" class="search_album_name"><%= albums[2].name %></a>
+                        </div>
+                    <% } else { %>
+                        <p>There is no match searching</p>
+                    <% } %>
+                </div>
+            
+                <!-- SEARCH ALL ARTIST -->
+                <div class="search_artist_container">
+                    <h2 class="search_artist_header">Artist</h2>
+                    <div class="search_artist_wrapper">
+                        <% if(artists.length < 3){ %>
+                            <% artists.forEach(artist => { %>
+                                <div class="search_artist">
+                                    <div class="search_artist_img_container">
+                                        <img src="<%= artist.image %>" alt="artist_img" class="search_artist_img">
+                                    </div>
+                                    <a href="/artist/<%= artist._id %>" class="search_artist_name"><%= artist.name %></a>
+                                </div>
+                            <% }) %>
+                        <% } else if(artists.length > 3){ %>
+                            <div class="search_artist">
+                                <div class="search_artist_img_container">
+                                    <img src="<%= artists[0].image %>" alt="artist_img" class="search_artist_img">
+                                </div>
+                                <a href="/artist/<%= artists[0]._id %>" class="search_artist_name"><%= artists[0].name %></a>
+                            </div>
+                            <div class="search_artist">
+                                <div class="search_artist_img_container">
+                                    <img src="<%= artists[1].image %>" alt="artist_img" class="search_artist_img">
+                                </div>
+                                <a href="/artist/<%= artists[1]._id %>" class="search_artist_name"><%= artists[1].name %></a>
+                            </div>
+                            <div class="search_artist">
+                                <div class="search_artist_img_container">
+                                    <img src="<%= artists[2].image %>" alt="artist_img" class="search_artist_img">
+                                </div>
+                                <a href="/artist/<%= artists[2]._id %>" class="search_artist_name"><%= artists[2].name %></a>
+                            </div>
+                        <% } else { %>
+                            <p>There is no match searching</p>
+                        <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SEARCH SONG -->
+        <div id="song" class="search_type_song">
+            <div class="song_container">
+                <h2 class="search_song_header">Song</h2>
+                <div class="songs">
+                    <% if(songs.length > 0){ %>
+                        <% songs.forEach((song, index) => { %>
+                            <div class="song">
+                                <div class="song_img">
+                                    <img src="<%= song.cover %>" alt="song_img">
+                                </div>
+                                <a href="/song/<%= song._id %>" class="song_name"><%= index + 1 %> <%= song.name %></a>
+                                <a href="/artist/<%= song.artist._id %>" class="song_artist"><%= song.artist.name %></a>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>There is no match searching</p>
+                    <% } %>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH ALBUM -->
+        <div id="album" class="search_type_album">
+            <div class="album_container">
+                <h2 class="search_album_header">Album</h2>
+                <div class="albums">
+                    <% if(albums.length > 0){ %>
+                        <% albums.forEach(album => { %>
+                            <div class="album">
+                                <div class="album_img">
+                                    <img src="<%= album.cover %>" alt="album_img">
+                                </div>
+                                <a href="/playlist/<%= album._id %>" class="album_name"><%= album.name %></a>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>There is no match searching</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH ARTIST -->
+        <div id="artist" class="search_type_artist">
+            <div class="artist_container">
+                <h2 class="search_artist_header">Artist</h2>
+                <div class="artists">
+                    <% if(artists.length > 0){ %>
+                        <% artists.forEach(artist => { %>
+                            <div class="artist">
+                                <div class="artist_img">
+                                    <img src="<%= artist.image %>" alt="artist_img">
+                                </div>
+                                <a href="/artist/<%= artist._id %>" class="artist_name"><%= artist.name %></a>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>There is no match searching</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

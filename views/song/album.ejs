@@ -1,0 +1,96 @@
+<%- include('../partials/album_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid album_header">
+        <div class="album_img_container">
+            <img src="<%= album.cover %>" alt="album_img" class="album_img">
+        </div>
+        <div class="album_wrapper">
+            <div class="album_desc_container">
+                <h2 class="album_name"><%= album.name %></h2>
+                <% if(songs.length > 1){ %>
+                    <p class="album_total"><%= songs.length %> songs</p>
+                <% } else { %>
+                    <p class="album_total"><%= songs.length %> song</p>
+                <% } %>
+            </div>
+            <div class="album_player">
+                <div class="album_icon_container">
+                    <img id="playback" src="/IMG/playback_button.png" alt="player_icon" class="album_icon">
+                </div>
+                <div class="album_icon_container">
+                    <img id="play" src="/IMG/play_button.png" alt="player_icon" class="album_icon">
+                </div>
+                <div class="album_icon_container">
+                    <img id="skip" src="/IMG/skip_button.png" alt="player_icon" class="album_icon">
+                </div>
+                <div class="album_icon_container">
+                    <img id="mute" src="/IMG/volume_icon.png" alt="player_icon" class="album_icon">
+                </div>
+                <div class="volume_control">
+                    <input type="range" max="50" step="1" id="volume_control" class="album_icon">
+                </div>
+                <% songs.forEach(song => { %>
+                    <audio id="song">
+                        <source src="<%= song.file %>" type="audio/mpeg">
+                    </audio>
+                <% }) %>
+            </div>
+            <div class="progress_bar">
+                <i id="current_time">0.00</i>
+                <input type="range" min="0" max="" value="0" id="progress_bar" class="album_icon">
+                <i id="duration_time">0.00</i>
+            </div>
+        </div>
+    </div>
+    <div class="content_wrapper">
+        <div class="album_song_container">
+            <% songs.forEach((song, index) => { %>
+                <div class="album_song">
+                    <div class="playing_icon">
+                        <img src="/IMG/playing_icon.png" alt="playing_icon">
+                    </div>
+                    <a href="/song/<%= song._id %>" class="album_song_name song_name"><%= index + 1 %> <%= song.name %></a>
+                    <a href="/artist/<%= song.artist._id %>" class="album_song_artist"><%= song.artist.name %></a>
+                </div>
+            <% }) %>
+        </div>
+
+        <!-- SIDE CONTENT -->
+        <div class="content_side_container">
+            <div class="top_song_container">
+                <h3 class="top_song_text">Top Song</h3>
+
+                <% topSongs.forEach((topSong, index) => { %>
+                    <div class="top_song">
+                        <div class="top_song_img_container">
+                            <a href="/song/<%= topSong._id %>">
+                                <img src="<%= topSong.cover %>" alt="top_song_img" class="top_song_img">
+                            </a>
+                        </div>
+                        <div class="top_song_desc_wrapper">
+                            <a href="/song/<%= topSong._id %>" class="top_song_name"><%= index + 1 %> <%= topSong.name %></a>
+                            <a href="/artist/<%= topSong.artist._id %>" class="top_song_artist"><%= topSong.artist.name %></a>
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+            <div class="content_side_spliter"></div>
+            <div class="top_search_container">
+                <h3 class="top_search_text">Top Search</h3>
+                <div class="top_search_wrapper">
+                    <% topSearches.forEach(topSearch => { %>
+                        <form action="/song/search" method="POST">
+                            <button class="top_search" name="search"><%= topSearch.keyword %></button>
+                        </form>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

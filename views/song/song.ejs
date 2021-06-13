@@ -1,0 +1,142 @@
+<%- include('../partials/song_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid song_header">
+        <div class="song_img_container">
+            <img src="<%= song.cover %>" alt="song_img" class="song_img">
+        </div>
+        <div class="song_wrapper">
+            <div class="song_detail_container">
+                <h2 class="song_name"><%= song.name %></h2>
+                <h2 class="song_artist"><%= song.artist.name %></h2>
+                <p class="song_desc">Genre: <%= song.category.name %></p>
+                <p id="length" class="song_desc"></p>
+            </div>
+            <div class="song_player">
+                <div class="song_icon_container">
+                    <img id="playback" src="/IMG/playback_button.png" alt="player_icon" class="song_icon">
+                </div>
+                <div class="song_icon_container">
+                    <img id="play" src="/IMG/play_button.png" alt="player_icon" class="song_icon">
+                </div>
+                <div class="song_icon_container">
+                    <img id="skip" src="/IMG/skip_button.png" alt="player_icon" class="song_icon">
+                </div>
+                <div class="song_icon_container">
+                    <img id="mute" src="/IMG/volume_icon.png" alt="player_icon" class="song_icon">
+                </div>
+                <div class="volume_control">
+                    <input type="range" max="50" step="1" id="volume_control" class="song_icon">
+                </div>
+                <% if(currentUser){ %>
+                    <div class="song_icon_container">
+                        <% if(currentUser.favorites.includes(song._id)){ %>
+                            <form action="/song/<%= song._id %>/remove_from_favorite" method="POST">
+                                <button type="submit" class="fav_button">
+                                    <img src="/IMG/favorite_icon.png" alt="player_icon" class="song_icon">
+                                </button>
+                            </form>
+                        <% } else { %>
+                            <form action="/song/<%= song._id %>/add_to_favorite" method="POST">
+                                <button type="submit" class="fav_button">
+                                    <img src="/IMG/favorite_button.png" alt="player_icon" class="song_icon">
+                                </button>
+                            </form>
+                        <% } %>
+                    </div>
+                    <div id="open_button" class="song_icon_container">
+                        <img src="/IMG/add_button.png" alt="player_icon" class="song_icon">
+                    </div>
+                    <div class="song_icon_container">
+                        <a href="<%= song.file %>" download="<%= song.name %>.mp3">
+                            <img src="/IMG/download_button.png" alt="player_icon" class="song_icon">
+                        </a>
+                    </div>
+                <% } %>
+                <audio id="song">
+                    <source src="<%= song.file %>" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="progress_bar">
+                <i id="current_time">0.00</i>
+                <input type="range" min="0" max="" value="0" id="progress_bar" class="song_icon">
+                <i id="duration_time"></i>
+            </div>
+        </div>
+    </div>
+    <div class="content_wrapper">
+        <div class="song_lyrics_container">
+            <p><%= song.lyrics %></p>
+        </div>
+
+        <!-- SIDE CONTENT -->
+        <div class="content_side_container">
+            <div class="top_song_container">
+                <h3 class="top_song_text">Top Song</h3>
+                <% topSongs.forEach((topSong, index) => { %>
+                    <div class="top_song">
+                        <div class="top_song_img_container">
+                            <a href="/song/<%= topSong._id %>">
+                                <img src="<%= topSong.cover %>" alt="top_song_img" class="top_song_img">
+                            </a>
+                        </div>
+                        <div class="top_song_desc_wrapper">
+                            <a href="/song/<%= topSong._id %>" class="top_song_name"><%= index + 1 %> <%= topSong.name %></a>
+                            <a href="/artist/<%= topSong.artist._id %>" class="top_song_artist"><%= topSong.artist.name %></a>
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+            <div class="content_side_spliter"></div>
+            <div class="top_search_container">
+                <h3 class="top_search_text">Top Search</h3>
+                <div class="top_search_wrapper">
+                    <% topSearches.forEach(topSearch => { %>
+                        <form action="/song/search" method="POST">
+                            <button class="top_search" name="search"><%= topSearch.keyword %></button>
+                        </form>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="content_side_spliter"></div>
+            <div class="familiar_song_container">
+                <h3 class="familiar_song_text">Familiar Song</h3>
+
+                <% familairSongs.forEach(familairSong => { %>
+                    <div class="familiar_song">
+                        <a href="/song/<%= familairSong._id %>" class="familiar_song_name"><%= familairSong.name %></a>
+                        <a href="/artist/<%= familairSong.artist._id %>" class="familiar_song_artist"><%= familairSong.artist.name %></a>
+                    </div>
+                <% }) %>
+                 
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if(currentUser){ %>
+    <div id="form" class="form">
+        <div>
+            <button id="cancel_button" class="cancel_icon"><img src="/IMG/x_icon.png" alt="cancel_icon"></button>
+            <h2>Select playlist</h2>
+            <% userPlaylists.forEach(playlist => { %>
+                <% if(playlist.songs.includes(song._id)){ %>
+                    <form action="/song/<%= song._id %>/remove_from_playlist" method="POST" class="playlist_form">
+                        <label class="playlist_name"><%= playlist.name %></label>
+                        <button type="submit" class="add_button" name="playlistId" value="<%= playlist._id %>">added</button><br>
+                    </form>
+                <% } else { %>
+                    <form action="/song/<%= song._id %>/add_to_playlist" method="POST" class="playlist_form">
+                            <label class="playlist_name"><%= playlist.name %></label>
+                            <button type="submit" class="add_button" name="playlistId" value="<%= playlist._id %>">add</button><br>
+                    </form>
+                <% } %>
+            <% }) %>
+        </div>
+    </div>
+<% } %>
+
+<%- include('../partials/footer.ejs') %>

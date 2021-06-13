@@ -1,0 +1,34 @@
+<%- include('../partials/category_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div id="background" class="container-fluid category_header">
+        <div class="category_desc">
+            <h2 class="category_name"><%= category.name %></h2>
+            <% if(songs.length > 1){ %>
+                <p class="category_total"><%= songs.length %> songs</p>
+            <% } else { %>
+                <p class="category_total"><%= songs.length %> song</p>
+            <% } %>
+        </div>
+        <img src="<%= category.image %>" alt="category_img" id="img" class="category_img">
+    </div>
+
+    <!-- SONG -->
+    <div class="container-fluid content_wrapper">
+        <div class="category_song_container">
+            <% songs.forEach((song, index) => { %>
+                <div class="category_song">
+                    <div class="category_song_img">
+                        <img src="<%= song.cover %>" alt="song_img">
+                    </div>
+                    <a href="/song/<%= song._id %>" class="category_song_name"><%= index + 1 %> <%= song.name %></a>
+                    <a href="/song/<%= song.artist._id %>" class="category_song_artist"><%= song.artist.name %></a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

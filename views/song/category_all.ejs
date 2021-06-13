@@ -1,0 +1,29 @@
+<%- include('../partials/category_all_rel.ejs') %>
+<%- include('../partials/header.ejs') %>
+
+<!-- CONTENT -->
+<div class="content">
+    <div class="container-fluid category_header">
+        <div class="category_desc">
+            <h2 class="category_name">Categories</h2>
+        </div>
+    </div>
+
+    <!-- CATEGORY -->
+    <div class="container-fluid content_wrapper">
+        <div class="category_song_container">
+            <div class="categories">
+                <% categories.forEach(category => { %>
+                    <a href="/category/<%= category._id %>" class="category">
+                        <p class="category_name"><%= category.name %></p>
+                        <div class="category_img_container">
+                            <img src="<%= category.image %>" alt="category_img" class="category_img">
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,293 @@
+:root {
+    --bg-primary: #5A5A5A;
+    --bg-accent: #252525;
+    --hd-primary: #000000;
+    --ft-primary: #727070;
+    --clr-primary: #FFFFFF;
+    font-size: 16px;
+}
+
+/* BODY */
+
+* {
+    box-sizing: border-box;
+    color: var(--clr-primary);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(90deg, rgba(90, 90, 90, 0.9), rgba(90, 90, 90, 0.9)), url(/IMG/main_background.jpg);
+    background-attachment: fixed;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    min-width: 100%;
+}
+
+/* CONTENT */
+.user_container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    padding: 0%;
+}
+
+/* PROFILE */
+.user_profile_container {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 30%;
+    padding: 20px;
+}
+.user_img_container {
+    width: 40%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.user_img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+.user_detail_container {
+    margin-top: 20px;
+    justify-content: center;
+}
+.user_rank_container {
+    width: 15%;
+    margin-left: 15%;
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+.user_rank_img {
+    width: 100%;
+    height: auto;
+}
+.user_rank_number {
+    color: blue;
+    position: absolute;
+    margin-top: 10px;
+}
+.user_name, .user_id, .user_rank {
+    width: fit-content;
+    margin-left: 35%;
+}
+.user_name {
+    margin-bottom: 10px;
+}
+.user_id, .user_rank {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+.user_nav_container {
+    margin-top: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* background-color: rgba(0,212,255,1); */
+}
+.user_nav {
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+.user_nav:hover {
+    color: var(--ft-primary);
+}
+.admin_button {
+    margin-top: 40px;
+    background-color: rgb(9, 97, 197);
+    border: none;
+    border-radius: 5px;
+}
+.setting_icon {
+    margin-top: 10px;
+    background-color: grey;
+    border: none;
+    border-radius: 5px;
+}
+.sign_out_button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+}
+
+/* favorite */
+.favorite_song_container {
+    width: 70%;
+    padding: 20px;
+    display: none;
+}
+.favorite_song_header {
+    width: fit-content;
+}
+.favorite_song_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.favorite_song_wrapper a {
+    flex-basis: 25%;
+    margin: 3%;
+    padding: 0;
+    text-decoration: none;    
+}
+.favorite_song {
+    display: flex;
+    background-color: black;
+}
+.favorite_song_img {
+    width: 50%;
+    height: auto;
+}
+.favorite_song_img img {
+    width: 100%;
+    height: auto;
+}
+.song_name, .song_artist {
+    margin: 0px 10px
+}
+.song_name {
+    font-size: 20px;
+}
+.song_artist {
+    color: var(--ft-primary);
+}
+
+/* PLAYLIST */
+.playlist_container {
+    width: 70%;
+    padding: 20px;
+    display: none;
+}
+.playlists {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.playlist_add_icon {
+    flex-basis: 30%;
+    margin: 10px;
+    display: flex;
+    cursor: pointer;
+    background-color: black;
+}
+.playlist_add_img {
+    width: 50%;
+    padding: 10px;
+}
+.playlist_add_img img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.playlist_add_desc {
+    width: 60%;
+    text-align: center;
+}
+.playlist_add_desc p{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.playlist_link {
+    flex-basis: 30%;
+    margin: 10px;
+    padding: 0;
+    text-decoration: none;
+}
+.playlist {
+    display: flex;
+    background-color: black;
+}
+.playlist_img {
+    width: 50%;
+    height: auto;
+}
+.playlist_img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.playlist_desc {
+    width: 60%;
+    padding: 10px;
+}
+
+.hidden_container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.hidden_container div {
+    width: 30%;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+}
+.profile_img {
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+}
+.profile_img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.input_form {
+    color: black;
+    margin-top: 10px;
+}
+.create_button {
+    margin-top: 10px;
+    background-color: black;
+    border: none;
+}
+.cancel_icon {
+    width: 10%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+}
+.cancel_icon img {
+    width: 100%;
+    height: auto;
+}
+#profile_form {
+    text-align: center;
+}
+
+/* INDICATOR */
+.selected {
+    color: rgb(0, 102, 255);
+}
+.current_active {
+    display: block;
+}
+.active {
+    display: flex;
+}
+textarea {
+    display: none;
+}

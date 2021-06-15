@@ -88,13 +88,12 @@ body {
     flex-wrap: wrap;
 }
 .album_song {
-    flex-basis: 25%;
-    margin: 3%;
+    flex-basis: 20%;
+    margin: 20px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    /* background-color: yellow; */
 }
 .album_song_img {
     width: 50%;
@@ -112,9 +111,9 @@ body {
     text-decoration: none;
 }
 .album_song_name {
+    text-align: center;
     font-size: 3vmin;
     color: var(--clr-primary);
-    /* background-color: yellowgreen; */
 }
 .album_song_name:hover {
     color: var(--bg-primary);
@@ -125,5 +124,4 @@ body {
 .album_song_artist {
     color: var(--ft-primary);
     margin-left: 18px;
-    /* background-color: violet; */
 }

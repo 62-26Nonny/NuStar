@@ -5,13 +5,8 @@ var express     = require('express'),
     searchSchema = require('../schemas/search')
 
 router.get('/', async function(req, res){
-    var albums = await albumSchema.find({}, function(err, result){
-        if(err){
-            console.log(err);
-        } else {
-            console.log(result);
-        }
-    })
+    var albums = await albumSchema.find({}).limit(12).sort({_id: -1});
+
     res.render('song/album_all.ejs', {albums: albums});
 });   
 

@@ -4,12 +4,14 @@
 <!-- CONTENT -->
 <div class="content">
     <div class="container-fluid playlist_header">
-        <div class="playlist_img_container">
-            <% if(playlist.songs.length == 0){ %>
-                <img src="/IMG/logo.png" alt="playlist_img" class="playlist_img">
-            <% } else { %>
-                <img src="<%= playlist.songs[0].cover %>" alt="playlist_img" class="playlist_img">
-            <% } %>
+        <div class="playlist">
+            <div class="playlist_img">
+                <% if(playlist.songs.length == 0){ %>
+                    <img src="/IMG/logo.png" alt="playlist_img">
+                <% } else { %>
+                    <img src="<%= playlist.songs[0].cover %>" alt="playlist_img">
+                <% } %>
+            </div>
         </div>
         <div class="playlist_wrapper">
             <div class="playlist_desc_container">
@@ -19,6 +21,12 @@
                 <% } else { %>
                     <p class="playlist_total"><%= playlist.songs.length %> song</p>
                 <% } %>
+                <div id="open_button" class="edit_icon">
+                    <img src="/IMG/name_edit_icon.png" alt="player_icon" class="playlist_icon">
+                </div>
+                <form action="/user/playlist/<%= playlist._id %>/delete" method="POST" class="del_icon">
+                    <button type="submit"><img src="/IMG/delete_icon.png" alt="player_icon" class="playlist_icon"></button>
+                </form>
             </div>
             <div class="playlist_player">
                 <div class="playlist_icon_container">
@@ -35,6 +43,12 @@
                 </div>
                 <div class="volume_control">
                     <input type="range" max="50" step="1" id="volume_control" class="playlist_icon">
+                </div>
+                <div class="playlist_icon_container">
+                    <img id="loop" src="/IMG/loop_icon.png" alt="player_icon" class="playlist_icon">
+                </div>
+                <div class="playlist_icon_container">
+                    <img id="shuffle" src="/IMG/shuffle_icon.png" alt="player_icon" class="playlist_icon">
                 </div>
                 <% playlist.songs.forEach(song => { %>
                     <audio id="song">
@@ -53,11 +67,16 @@
         <div class="playlist_song_container">
             <% playlist.songs.forEach((song, index) => { %>
                 <div class="playlist_song">
-                    <div class="playing_icon">
-                        <img src="/IMG/playing_icon.png" alt="playing_icon">
+                    <div class="playing_icon_container">
+                        <img src="/IMG/play_icon.png" alt="playing_icon" class="playing_icon">
                     </div>
                     <a href="/song/<%= song._id %>" class="playlist_song_name song_name"><%= index + 1 %> <%= song.name %></a>
                     <a href="/artist/<%= song.artist._id %>" class="playlist_song_artist"><%= song.artist.name %></a>
+                    <form action="/user/playlist/<%= playlist._id %>/song/delete" method="POST"class="delete_form">
+                        <button class="del_button" name="songId" value="<%= song._id %>">
+                            <img src="/IMG/delete_icon.png" alt="delete_icon">
+                        </button>
+                    </form>
                 </div>
             <% }) %>
         </div>
@@ -94,6 +113,18 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="form" class="hidden_container">
+    <div>
+        <button id="cancel_button" class="cancel_icon"><img src="/IMG/x_icon.png" alt="cancel_icon"></button>
+        <h2>Edit playlist</h2>
+        <form action="/user/playlist/<%= playlist._id %>/update" method="POST" class="playlist_form">
+            <label>Playlist name</label>
+            <input type="text" name="playlistName" class="input_form" value="<%= playlist.name %>">
+            <button type="submit" class="create_button" name="userId">Update<br>
+        </form>
     </div>
 </div>
 

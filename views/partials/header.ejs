@@ -27,9 +27,9 @@
     <!-- SEARCH BAR -->
     <form action="/song/search" method="POST" class="search_bar">
         <% if(typeof keyword != 'undefined'){ %>
-            <input type="text" name="search" class="search_input" value="<%= keyword %>">
+            <input type="text" name="search" placeholder="Search by song, artist, album" class="search_input" value="<%= keyword %>">
         <% } else { %>
-            <input type="text" name="search" class="search_input">
+            <input type="text" name="search" placeholder="Search by song, artist, album" class="search_input">
         <% } %>
         <button class="search_button">Search</button>
     </form>
@@ -45,12 +45,23 @@
     <% } else { %>
         <!-- USER IMG -->
         <div class="user_link_button">
-            <a href="/user">
+            <a href="/user" class="user_link">
                 <% if(currentUser.image != ""){ %>
                     <img src="<%= currentUser.image %>" alt="user_img" class="user_img">
                 <% } else { %>
                     <img src="/IMG/user_icon.png" alt="user_img" class="user_img">
                 <% } %>
+                <% if(currentUser.privilage == 'Membership'){ %>
+                    <img src="/IMG/membership_icon.png" alt="rank_icon" class="membership">
+                <% } %>
+            </a>
+        </div>
+        <div class="other_button">
+            <img src="/IMG/other_icon.png" alt="other_button">
+        </div>
+        <div class="other_bar">
+            <a href="/sign_out">
+                <button class="sign_out_button">Sign out</button>
             </a>
         </div>
     <% } %> 
@@ -79,6 +90,12 @@
         Membership
     </a>
     <% if(currentUser){ %>
+        <a href="/user/following" class="nav_link">
+            <div class="nav_icon">
+                <img src="/IMG/following_icon.png" alt="following_icon">
+            </div>
+            My following
+        </a>
         <a href="/user" class="nav_link">
             <div class="nav_icon">
                 <img src="/IMG/mysong_icon.png" alt="mysong_icon">

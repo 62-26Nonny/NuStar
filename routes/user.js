@@ -1,9 +1,12 @@
+const artist = require('../schemas/artist');
+
 var express     = require('express'),
     router      = express.Router(),
     middleware  = require('../middleware/index'),
     userSchema  = require('../schemas/user'),
     playlistSchema = require('../schemas/playlist'),
     songSchema  = require('../schemas/song'),
+    artistSchema = require('../schemas/artist'),
     searchSchema = require('../schemas/search')
 
 // HOME
@@ -66,6 +69,104 @@ router.get('/playlist/:id', middleware.isSigned, async function(req, res){
     var topSearches = await searchSchema.find({keyword: {$ne: ""}}).limit(10);
 
     res.render('song/playlist.ejs', {playlist: playlist, topSongs: topSongs, topSearches: topSearches})
+});
+
+router.post('/playlist/:id/update', middleware.isSigned, async function(req, res){
+    var playlistName = req.body.playlistName;
+    var newValues = {
+        name: playlistName
+    }
+
+    playlistSchema.findByIdAndUpdate(req.params.id, newValues, function(err, result){
+        if(err){
+            console.log(err);
+        } else {
+            res.redirect('/playlist/' + req.params.id);
+        }
+    })
+});
+
+router.post('/playlist/:id/delete', middleware.isSigned, async function(req, res){
+    playlistSchema.findByIdAndDelete(req.params.id, function(err, result){
+        if(err){
+            console.log(err);
+        } else {
+            res.redirect('/user');
+        }
+    })
+});
+
+router.post('/playlist/:id/song/delete', middleware.isSigned, async function(req, res){
+    var songId = req.body.songId;
+    var newValues = {
+        $pull: {
+            songs: songId
+        }
+    }
+
+    playlistSchema.findByIdAndUpdate(req.params.id, newValues, function(err, result){
+        if(err){
+            console.log(err);
+        } else {
+            res.redirect('/playlist/' + req.params.id);
+        }
+    })
+});
+
+// ARTIST
+router.post('/artist/:id/follow', middleware.isSigned, async function(req, res){
+    var artistId = req.params.id;
+
+    var newValues = {
+        $push: {
+            follow: artistId
+        }
+    }
+    userSchema.findByIdAndUpdate(req.user.id, newValues, function(err, result){
+        if(err){
+            console.log(err);
+        } else {
+            artistSchema.findByIdAndUpdate(artistId, {$inc: {followCount: 1}}, function(err, result){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.redirect('/artist/' + req.params.id);
+                }
+            });
+        }
+    })
+});
+
+router.post('/artist/:id/unfollow', middleware.isSigned, async function(req, res){
+    var artistId = req.params.id;
+
+    var newValues = {
+        $pull: {
+            follow: artistId
+        }
+    }
+    userSchema.findByIdAndUpdate(req.user.id, newValues, function(err, result){
+        if(err){
+            console.log(err);
+        } else {
+            artistSchema.findByIdAndUpdate(artistId, {$inc: {followCount: -1}}, function(err, result){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.redirect('/artist/' + req.params.id);
+                }
+            });
+        }
+    })
+});
+
+// FOLLOW
+router.get('/following', middleware.isSigned, async function(req, res){
+    var follow = req.user.follow;
+
+    var followSong = await songSchema.find({artist: {$in: follow}}).populate('artist').sort({_id: -1});
+
+    res.render('following.ejs', {followSong: followSong});
 });
 
 // PAYMENT

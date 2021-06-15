@@ -24,25 +24,25 @@
     <div class="payment">
         <form action="/user/payment/<%= order %>" method="POST" class="payment_form">
             <label class="payment_label">Card number</label><br>
-            <input type="text" name="card_number" class="payment_input"><br>
+            <input type="text" name="card_number" class="payment_input" required><br>
             <label class="payment_label">Name on card</label><br>
-            <input type="text" name="card_name" class="payment_input"><br>
+            <input type="text" name="card_name" class="payment_input" required><br>
             <div>
                 <div>
                     <label class="payment_label">Mouth</label><br>
-                    <input type="text" name="exp_mouth" class="payment_input">
+                    <input type="text" name="exp_mouth" class="payment_input" required>
                 </div>
                 <div>
                     <label class="payment_label">Year</label><br>
-                    <input type="text" name="exp_year" class="payment_input">
+                    <input type="text" name="exp_year" class="payment_input" required>
                 </div>
                 <div>
                     <label class="payment_label">CVC</label><br>
-                    <input type="text" name="cvc_number" class="payment_input">
+                    <input type="text" name="cvc_number" class="payment_input" required>
                 </div>
             </div>
             <label class="payment_label">Email</label>
-            <input type="email" name="email" class="payment_input"><br>
+            <input type="email" name="email" class="payment_input" required><br>
             <button type="submit">Check out</button>
         </form>
     </div>

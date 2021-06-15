@@ -39,6 +39,19 @@ const userSchema = mongoose.Schema({
             }
         ], 
         default: []
+    },
+    follow: {
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'artists'
+            }
+        ],
+        default: []
+    },
+    admin: {
+        type: Boolean,
+        default: false
     }
 });
 

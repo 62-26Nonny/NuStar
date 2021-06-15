@@ -71,12 +71,47 @@
     height: auto;
     min-width: 50px;
     margin-left: 18%;
+    display: flex;
+    align-items: center;
+}
+.user_link {
+    position: relative;
 }
 .user_img {
     width: 100%;
     height: auto;
     border-radius: 50%;
 }
+.membership {
+    width: 40%;
+    height: auto;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.other_button {
+    width: 2%;
+    height: auto;
+    margin: 0 auto;
+}
+.other_button img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.other_bar {
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: -30%;
+}
+.sign_out_button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+}
+
 
 @media screen and (max-width: 660px){
     .search_input {

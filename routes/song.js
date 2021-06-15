@@ -34,32 +34,61 @@ router.post('/search', function(req, res){
 });
 
 router.post('/search/sort', async function(req,res){
+    var field = req.query.field;
     var sort = req.body.sort;
     var keyword = req.body.search;
     
-    res.redirect('/song/search?keyword=' + keyword + '&sort=' + sort);
+    res.redirect('/song/search?keyword=' + keyword + '&sort=' + sort + '&field=' + field);
 });
 
 router.get('/search', async function(req,res){
-    var songs = await songSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
-                                .populate('artist')
-                                .sort({name: req.query.sort})
-                                .collation({locale: 'en'});
-
-    var artists = await artistSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+    var field = req.query.field;
+    if(field == "name"){
+        var songs = await songSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .populate('artist')
+                                    .sort({name: req.query.sort})
+                                    .collation({locale: 'en'});
+        
+        var artists = await artistSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
                                     .sort({name: req.query.sort})
                                     .collation({locale: 'en'});
     
-    var albums = await albumSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+        var albums = await albumSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
                                     .populate("songs")
                                     .sort({name: req.query.sort})
                                     .collation({locale: 'en'});
+    } else if(field == "_id"){
+        var songs = await songSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .populate('artist')
+                                    .sort({_id: req.query.sort})
+                                    .collation({locale: 'en'});
+        
+        var artists = await artistSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .sort({_id: req.query.sort})
+                                    .collation({locale: 'en'});
     
+        var albums = await albumSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .populate("songs")
+                                    .sort({_id: req.query.sort})
+                                    .collation({locale: 'en'});
+    } else {
+        var songs = await songSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .populate('artist')
+                                    .collation({locale: 'en'});
+        
+        var artists = await artistSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .collation({locale: 'en'});
+    
+        var albums = await albumSchema.find({name: {$regex: ".*" + req.query.keyword + ".*", $options: 'i'}})
+                                    .populate("songs")
+                                    .collation({locale: 'en'});
+    }
+
     res.render('song/search.ejs', {songs: songs, artists: artists, albums: albums, keyword: req.query.keyword});
 });
 
 router.get('/top', async function(req,res){
-    var topSongs = await songSchema.find().populate('artist').sort({favoriteCount: -1});
+    var topSongs = await songSchema.find().populate('artist').limit(12).sort({favoriteCount: -1});
 
     res.render('song/top_all.ejs', {topSongs: topSongs});
 });

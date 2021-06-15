@@ -19,10 +19,17 @@ router.get('/song_management/song', middleware.isSigned, async function(req,res)
 
     var keyword = req.query.keyword || "";
 
-    var songs = await songSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}}).populate('artist').populate('album').populate('category')
-                                .sort({name: req.query.sort})
-                                .collation({locale: 'en'});
-
+    if(req.query.sort){
+        var songs = await songSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                    .populate('artist').populate('album').populate('category')
+                                    .sort({name: req.query.sort})
+                                    .collation({locale: 'en'});
+    } else {
+        var songs = await songSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                    .populate('artist').populate('album').populate('category')
+                                    .collation({locale: 'en'});
+    }
+    
     res.render('admin/songManage.ejs', {user: user, songs: songs, artists: artists, albums: albums, categories: categories, keyword: keyword});
 });
 
@@ -31,9 +38,14 @@ router.get('/song_management/artist', middleware.isSigned, async function(req,re
     
     var keyword = req.query.keyword || "";
 
-    var artists = await artistSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
-                                    .sort({name: req.query.sort})
-                                    .collation({locale: 'en'});
+    if(req.query.sort){
+        var artists = await artistSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                        .sort({name: req.query.sort})
+                                        .collation({locale: 'en'});
+    } else {
+        var artists = await artistSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                        .collation({locale: 'en'});
+    }
 
     res.render('admin/artistManage.ejs', {user: user, artists: artists, keyword: keyword});
 });
@@ -43,9 +55,14 @@ router.get('/song_management/album', middleware.isSigned, async function(req,res
     
     var keyword = req.query.keyword || "";
 
-    var albums = await albumSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+    if(req.query.sort){
+        var albums = await albumSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
                                     .sort({name: req.query.sort})
                                     .collation({locale: 'en'});
+    } else {
+        var albums = await albumSchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                    .collation({locale: 'en'});
+    }
 
     res.render('admin/albumManage.ejs', {user: user, albums: albums, keyword: keyword});
 });
@@ -55,9 +72,14 @@ router.get('/song_management/category', middleware.isSigned, async function(req,
     
     var keyword = req.query.keyword || "";
 
-    var categories = await categorySchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
-                                        .sort({name: req.query.sort})
-                                        .collation({locale: 'en'});
+    if(req.query.sort){
+        var categories = await categorySchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                            .sort({name: req.query.sort})
+                                            .collation({locale: 'en'});
+    } else {
+        var categories = await categorySchema.find({name: {$regex: ".*" + keyword + ".*", $options: 'i'}})
+                                            .collation({locale: 'en'});
+    }
 
     res.render('admin/categoryManage.ejs', {user: user, categories: categories, keyword: keyword});
 });
@@ -67,9 +89,14 @@ router.get('/user_management', middleware.isSigned, async function(req,res){
 
     var keyword = req.query.keyword || "";
 
-    var users = await userSchema.find({username: {$regex: ".*" + keyword + ".*", $options: 'i', $nin: req.user.username}})
-                                .sort({username: req.query.sort})
-                                .collation({locale: 'en'});
+    if(req.query.sort){
+        var users = await userSchema.find({username: {$regex: ".*" + keyword + ".*", $options: 'i', $nin: req.user.username}})
+                                    .sort({username: req.query.sort})
+                                    .collation({locale: 'en'});
+    } else {
+        var users = await userSchema.find({username: {$regex: ".*" + keyword + ".*", $options: 'i', $nin: req.user.username}})
+                                    .collation({locale: 'en'});
+    }
 
     res.render('admin/userManage.ejs', {user: user, users: users, keyword: keyword});
 });
@@ -216,7 +243,7 @@ router.post('/artist/new', middleware.isSigned, function(req,res){
             console.log(result);
         }
     });
-    res.redirect('/admin/song_management');
+    res.redirect('/admin/song_management/artist');
 });
 
 router.post('/artist/update', middleware.isSigned, function(req,res){
@@ -277,7 +304,7 @@ router.post('/album/new', middleware.isSigned, function(req,res){
             console.log(result);
         }
     });
-    res.redirect('/admin/song_management');
+    res.redirect('/admin/song_management/album');
 });
 
 router.post('/album/update', middleware.isSigned, function(req,res){
@@ -338,7 +365,7 @@ router.post('/category/new', middleware.isSigned, function(req,res){
             console.log(result);
         }
     });
-    res.redirect('/admin/song_management');
+    res.redirect('/admin/song_management/category');
 });
 
 router.post('/category/update', middleware.isSigned, function(req,res){

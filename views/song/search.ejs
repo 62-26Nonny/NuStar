@@ -14,14 +14,24 @@
 
     <!-- SORT MENUS -->
     <div class="sort_container">
-        <form action="/song/search/sort" method="POST" class="sort_form">
-            <h3 class="sort_header">Sort</h3>
+        <form action="/song/search/sort?field=name" method="POST" class="sort_form">
+            <h3 class="sort_header">Sort by name:</h3>
             <input type="text" name="search" class="hidden" value="<%= keyword %>">
             <button type="submit" name="sort" value="1" class="sort_icon">
                 <img src="/IMG/alpha_sort_asce.png" alt="sort_icon">
             </button>
             <button type="submit" name="sort" value="-1" class="sort_icon">
                 <img src="/IMG/alpha_sort_desc.png" alt="sort_icon">
+            </button>
+        </form>
+        <form action="/song/search/sort?field=_id" method="POST" class="sort_form">
+            <h3 class="sort_header">Sort by release:</h3>
+            <input type="text" name="search" class="hidden" value="<%= keyword %>">
+            <button type="submit" name="sort" value="1" class="sort_icon">
+                <img src="/IMG/numerical_sort_asce.png" alt="sort_icon">
+            </button>
+            <button type="submit" name="sort" value="-1" class="sort_icon">
+                <img src="/IMG/numerical_sort_desc.png" alt="sort_icon">
             </button>
         </form>
     </div>
@@ -34,13 +44,55 @@
             <!-- SEARCH ALL SONG -->
             <div class="search_song_container">
                 <h2 class="search_song_header">Song</h2>
-                <% if(songs.length > 0){ %>
+                <% if(songs.length < 10 && songs.length != 0){ %>
                     <% songs.forEach((song, index) => { %>
                         <div class="search_song">
                             <a href="/song/<%= song._id %>" class="search_song_name"><%= index + 1 %> <%= song.name %></a>
                             <a href="/artist/<%= song.artist._id %>" class="search_song_artist"><%= song.artist.name %></a>
                         </div>
                     <% }); %>
+                <% } else if(songs.length > 10 && songs.length) { %>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[0]._id %>" class="search_song_name">1 <%= songs[0].name %></a>
+                        <a href="/artist/<%= songs[0].artist._id %>" class="search_song_artist"><%= songs[0].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[1]._id %>" class="search_song_name">2 <%= songs[1].name %></a>
+                        <a href="/artist/<%= songs[1].artist._id %>" class="search_song_artist"><%= songs[1].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[2]._id %>" class="search_song_name">3 <%= songs[2].name %></a>
+                        <a href="/artist/<%= songs[2].artist._id %>" class="search_song_artist"><%= songs[2].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[3]._id %>" class="search_song_name">4 <%= songs[3].name %></a>
+                        <a href="/artist/<%= songs[3].artist._id %>" class="search_song_artist"><%= songs[3].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[4]._id %>" class="search_song_name">5 <%= songs[4].name %></a>
+                        <a href="/artist/<%= songs[4].artist._id %>" class="search_song_artist"><%= songs[4].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[5]._id %>" class="search_song_name">6 <%= songs[5].name %></a>
+                        <a href="/artist/<%= songs[5].artist._id %>" class="search_song_artist"><%= songs[5].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[6]._id %>" class="search_song_name">7 <%= songs[6].name %></a>
+                        <a href="/artist/<%= songs[6].artist._id %>" class="search_song_artist"><%= songs[6].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[7]._id %>" class="search_song_name">8 <%= songs[7].name %></a>
+                        <a href="/artist/<%= songs[7].artist._id %>" class="search_song_artist"><%= songs[7].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[8]._id %>" class="search_song_name">9 <%= songs[8].name %></a>
+                        <a href="/artist/<%= songs[8].artist._id %>" class="search_song_artist"><%= songs[8].artist.name %></a>
+                    </div>
+                    <div class="search_song">
+                        <a href="/song/<%= songs[9]._id %>" class="search_song_name">10 <%= songs[9].name %></a>
+                        <a href="/artist/<%= songs[9].artist._id %>" class="search_song_artist"><%= songs[9].artist.name %></a>
+                    </div>
+                    <p class="more_song">more in song page</p>
                 <% } else { %>
                     <p>There is no match searching</p>
                 <% } %>
@@ -51,13 +103,13 @@
                 <!-- SEARCH ALL ALBUM -->
                 <div class="search_album_container">
                     <h2 class="search_album_header">Album</h2>
-                    <% if(albums.length < 3){ %>
+                    <% if(albums.length < 3 && albums.length != 0){ %>
                         <% albums.forEach(album => { %>
                             <div class="search_album">
                                 <div class="search_album_img_container">
                                     <img src="<%= album.cover %>" alt="album_img" class="search_album_img">
                                 </div>
-                                <a href="/playlist/<%= album._id %>" class="search_album_name"><%= album.name %></a>
+                                <a href="/album/<%= album._id %>" class="search_album_name"><%= album.name %></a>
                             </div>
                         <% }) %>
                     <% } else if(albums.length > 3){ %>
@@ -65,20 +117,21 @@
                             <div class="search_album_img_container">
                                 <img src="<%= albums[0].cover %>" alt="album_img" class="search_album_img">
                             </div>
-                            <a href="/playlist/<%= albums[0]._id %>" class="search_album_name"><%= albums[0].name %></a>
+                            <a href="/album/<%= albums[0]._id %>" class="search_album_name"><%= albums[0].name %></a>
                         </div>
                         <div class="search_album">
                             <div class="search_album_img_container">
                                 <img src="<%= albums[1].cover %>" alt="album_img" class="search_album_img">
                             </div>
-                            <a href="/playlist/<%= albums[1]._id %>" class="search_album_name"><%= albums[1].name %></a>
+                            <a href="/album/<%= albums[1]._id %>" class="search_album_name"><%= albums[1].name %></a>
                         </div>
                         <div class="search_album">
                             <div class="search_album_img_container">
                                 <img src="<%= albums[2].cover %>" alt="album_img" class="search_album_img">
                             </div>
-                            <a href="/playlist/<%= albums[2]._id %>" class="search_album_name"><%= albums[2].name %></a>
+                            <a href="/album/<%= albums[2]._id %>" class="search_album_name"><%= albums[2].name %></a>
                         </div>
+                        <p class="more">more in album page</p>
                     <% } else { %>
                         <p>There is no match searching</p>
                     <% } %>
@@ -88,7 +141,7 @@
                 <div class="search_artist_container">
                     <h2 class="search_artist_header">Artist</h2>
                     <div class="search_artist_wrapper">
-                        <% if(artists.length < 3){ %>
+                        <% if(artists.length < 3 && artists.length != 0){ %>
                             <% artists.forEach(artist => { %>
                                 <div class="search_artist">
                                     <div class="search_artist_img_container">
@@ -116,6 +169,7 @@
                                 </div>
                                 <a href="/artist/<%= artists[2]._id %>" class="search_artist_name"><%= artists[2].name %></a>
                             </div>
+                            <p class="more">more in artist page</p>
                         <% } else { %>
                             <p>There is no match searching</p>
                         <% } %>
@@ -143,7 +197,6 @@
                     <% } else { %>
                         <p>There is no match searching</p>
                     <% } %>
-                    
                 </div>
             </div>
         </div>

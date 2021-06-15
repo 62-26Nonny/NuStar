@@ -16,21 +16,23 @@
                     <% } %>
                 </div>
                 <div class="user_detail_container">
-                    <div class="user_rank_container">
-                        <img src="/IMG/favorite_icon.png" alt="rank_icon" class="user_rank_img">
-                        <p class="user_rank_number"><%= user.NuRank %></p>
-                    </div>
+                    <% if(currentUser.privilage == 'Membership'){ %>
+                        <div class="user_rank_container">
+                            <img src="/IMG/membership_icon.png" alt="rank_icon" class="user_rank_img">
+                        </div>
+                    <% } %>
                     <p class="user_name"><%= user.username %></p>
-                    <p class="user_rank">NuRank: <%= user.NuRank %> stars</p>
+                    <p class="user_rank">NuStar: <%= user.NuRank %> stars</p>
                 </div>
             </div>
 
             <!-- NAV -->
             <div class="user_nav_container menus">
                 <a href="#favorite" class="user_nav selected">My Favorite</a>
-                <a href="#playlist" class="user_nav">My playlist</a>
+                <a href="#playlist" class="user_nav">My Playlist</a>
+                <a href="#gacha" class="user_nav">Gacha</a>
             </div>
-            <% if(currentUser && currentUser.privilage == "Admin"){ %>
+            <% if(currentUser.admin){ %>
                 <a href="/admin/song_management/song">
                     <button class="admin_button">Admin mode</button>
                 </a>
@@ -51,8 +53,10 @@
                     <% user.favorites.forEach(song => { %>
                         <a href="/song/<%= song._id %>" class="favorite_song_link">
                             <div class="favorite_song">
-                                <div class="favorite_song_img">
-                                    <img src="<%= song.cover %>" alt="song_img">
+                                <div class="song">
+                                    <div class="song_img">
+                                        <img src="<%= song.cover %>" alt="song_img">
+                                    </div>
                                 </div>
                                 <div class="favorite_song_desc">
                                     <p class="song_name"><%= song.name %></p>
@@ -100,8 +104,16 @@
                         </div>
                     </a>
                 <% }) %>
-                
             </div>
+        </div>
+
+        <!-- GACHA -->
+        <div id="gacha" class="gacha_container">
+            <h2 class="gacha_song_header">Gacha</h2>
+            <form action="/user/gacha" method="POST" class="gacha_form">
+                <h2>Get consmetic</h2>
+                <button class="random">Spin now: use 1 NuStar</button>
+            </form>
         </div>
     </div>
 </div>

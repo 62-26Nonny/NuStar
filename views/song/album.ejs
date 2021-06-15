@@ -4,8 +4,10 @@
 <!-- CONTENT -->
 <div class="content">
     <div class="container-fluid album_header">
-        <div class="album_img_container">
-            <img src="<%= album.cover %>" alt="album_img" class="album_img">
+        <div class="album">
+            <div class="album_img">
+                <img src="<%= album.cover %>" alt="album_img">
+            </div>
         </div>
         <div class="album_wrapper">
             <div class="album_desc_container">
@@ -30,7 +32,13 @@
                     <img id="mute" src="/IMG/volume_icon.png" alt="player_icon" class="album_icon">
                 </div>
                 <div class="volume_control">
-                    <input type="range" max="50" step="1" id="volume_control" class="album_icon">
+                    <input type="range" max="25" step="1" id="volume_control" class="album_icon">
+                </div>
+                <div class="album_icon_container">
+                    <img id="loop" src="/IMG/loop_icon.png" alt="player_icon" class="album_icon">
+                </div>
+                <div class="album_icon_container">
+                    <img id="shuffle" src="/IMG/shuffle_icon.png" alt="player_icon" class="album_icon">
                 </div>
                 <% songs.forEach(song => { %>
                     <audio id="song">
@@ -49,8 +57,8 @@
         <div class="album_song_container">
             <% songs.forEach((song, index) => { %>
                 <div class="album_song">
-                    <div class="playing_icon">
-                        <img src="/IMG/playing_icon.png" alt="playing_icon">
+                    <div class="playing_icon_container">
+                        <img src="/IMG/play_icon.png" alt="playing_icon" class="playing_icon">
                     </div>
                     <a href="/song/<%= song._id %>" class="album_song_name song_name"><%= index + 1 %> <%= song.name %></a>
                     <a href="/artist/<%= song.artist._id %>" class="album_song_artist"><%= song.artist.name %></a>

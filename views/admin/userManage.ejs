@@ -74,6 +74,7 @@
                     <th>username</th>
                     <th>email</th>
                     <th>privilage</th>
+                    <th>admin</th>
                     <th></th>
                 </tr>
                 <% users.forEach(user => { %>
@@ -81,6 +82,7 @@
                         <td><%= user.username %></td>
                         <td><%= user.email %></td>
                         <td><%= user.privilage %></td>
+                        <td><%= user.admin %></td>
                         <td class="button">
                             <button id="open_button" class="del_button" value="<%= user._id %>">Delete</button>
                         </td>

@@ -18,15 +18,17 @@
     <!-- SONG -->
     <div class="container-fluid content_wrapper">
         <div class="category_song_container">
-            <% songs.forEach((song, index) => { %>
-                <div class="category_song">
-                    <div class="category_song_img">
-                        <img src="<%= song.cover %>" alt="song_img">
+            <div class="categories">
+                <% songs.forEach((song, index) => { %>
+                    <div class="category_song">
+                        <div class="category_song_img">
+                            <img src="<%= song.cover %>" alt="song_img">
+                        </div>
+                        <a href="/song/<%= song._id %>" class="category_song_name"><%= index + 1 %> <%= song.name %></a>
+                        <a href="/artist/<%= song.artist._id %>" class="category_song_artist"><%= song.artist.name %></a>
                     </div>
-                    <a href="/song/<%= song._id %>" class="category_song_name"><%= index + 1 %> <%= song.name %></a>
-                    <a href="/song/<%= song.artist._id %>" class="category_song_artist"><%= song.artist.name %></a>
-                </div>
-            <% }) %>
+                <% }) %>
+            </div>
         </div>
     </div>
 </div>

@@ -42,7 +42,6 @@ body {
     margin-left: 10px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.5);
-    /* background-color: blue; */
 }
 .playlist_edit_icon_container {
     width: 7%;
@@ -64,12 +63,10 @@ body {
     padding: 0%;
     display: flex;
     justify-content: center;
-    /* background- color: brown; */
 }
 
 .playlist_player {
     display: flex;
-    /* background-coslor: violet; */
 }
 .playlist_icon_container {
     width: 8%;
@@ -97,7 +94,6 @@ body {
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    /* background-color: yellow; */
 }
 .playlist_song_img {
     width: 50%;
@@ -117,7 +113,6 @@ body {
 .playlist_song_name {
     font-size: 3vmin;
     color: var(--clr-primary);
-    /* background-color: yellowgreen; */
 }
 .playlist_song_name:hover {
     color: var(--bg-primary);
@@ -128,5 +123,4 @@ body {
 .playlist_song_artist {
     color: var(--ft-primary);
     margin-left: 18px;
-    /* background-color: violet; */
 }

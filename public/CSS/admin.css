@@ -283,7 +283,6 @@ textarea {
     width: 20%;
     height: auto;
     margin-top: 10px;
-    /* background-color: brown; */
 }
 .sort_header {
     color: white;
@@ -294,7 +293,6 @@ textarea {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* background-color: burlywood; */
 }
 .sort_icon {
     flex-basis: 20%;

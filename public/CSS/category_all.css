@@ -49,7 +49,6 @@ body {
     min-height: 88vh;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.5);
-    /* background-color: blue; */
 }
 
 .category_img_container {
@@ -65,12 +64,10 @@ body {
     padding: 0%;
     display: flex;
     justify-content: center;
-    /* background- color: brown; */
 }
 
 .category_player {
     display: flex;
-    /* background-coslor: violet; */
 }
 .category_icon_container {
     width: 8%;
@@ -97,7 +94,6 @@ body {
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
-    /* background-color: yellow; */
 }
 
 .category_song {
@@ -107,7 +103,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: yellow; */
 }
 .category_song_img {
     width: 100%;
@@ -134,7 +129,6 @@ body {
 .category_song_name {
     font-size: 3vmin;
     color: var(--clr-primary);
-    /* background-color: yellowgreen; */
 }
 .category_song_name:hover {
     color: var(--bg-primary);
@@ -145,7 +139,6 @@ body {
 .category_song_category {
     color: var(--ft-primary);
     margin-left: 18px;
-    /* background-color: violet; */
 }
 .category {
     background-color: black;
@@ -156,7 +149,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: 0.2s ease-in;
-    /* background-color: seagreen; */
 }
 .category:hover {
     background-color: black;

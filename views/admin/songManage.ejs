@@ -80,7 +80,9 @@
                             </button>
                         </form>
                     </div>
-                    
+
+                    <button class="add_button song_form song_table">Add song</button>
+
                     <table class="table">
                         <tr>
                             <th>Song name</th>
@@ -102,11 +104,11 @@
                                 <td class="button"><button class="edit_button song_form song_table" value="<%= song._id %>">Edit</button></td>
                                 <td class="button">
                                     <button id="open_button" class="del_button" value="<%= song._id %>">Delete</button>
+                                    <input type="text" class="hidden file<%= song._id %> del_button" value="<%= song._id %>">
                                 </td>
                             </tr>
                         <% }) %>
                     </table>
-                    <button class="add_button song_form song_table">Add song</button>
                 </div>
 
                 <!-- SONG FORM -->

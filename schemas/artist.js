@@ -12,7 +12,11 @@ const reqFile = {
 
 const artistSchema = mongoose.Schema({
     name: reqString,
-    image: reqFile
+    image: reqFile,
+    followCount: {
+        type:Number,
+        default: 0
+    }
 });
 
 module.exports = mongoose.model('artists', artistSchema);

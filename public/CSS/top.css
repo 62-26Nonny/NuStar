@@ -42,7 +42,6 @@ body {
     margin-left: 10px;
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.5);
-    /* background-color: blue; */
 }
 .top_edit_icon_container {
     width: 7%;
@@ -64,12 +63,10 @@ body {
     padding: 0%;
     display: flex;
     justify-content: center;
-    /* background- color: brown; */
 }
 
 .top_player {
     display: flex;
-    /* background-coslor: violet; */
 }
 .top_icon_container {
     width: 8%;
@@ -99,9 +96,7 @@ body {
 }
 .top_song_img {
     width: 50%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    height: 100%;
 }
 .top_song_img img{
     width: 100%;
@@ -115,7 +110,6 @@ body {
 .top_song_name {
     font-size: 3vmin;
     color: var(--clr-primary);
-    /* background-color: yellowgreen; */
 }
 .top_song_name:hover {
     color: var(--bg-primary);

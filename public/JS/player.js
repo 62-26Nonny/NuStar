@@ -29,6 +29,11 @@ function pauseSong(){
     play_icon.addEventListener('click', playSong);
 }
 
+song.addEventListener('ended', e => {
+    pauseSong();
+    resetValue();
+});
+
 playback_button.addEventListener('click', playbackSong);
 function playbackSong(){
     song.currentTime = song.currentTime - 5;
@@ -75,6 +80,11 @@ function progressValue(){
     current_time.textContent = formatTime(song.currentTime);
     duration_time.textContent = formatTime(song.duration);
     length.innerHTML = "Length: " + duration_time.textContent + " mins";
+}
+
+function resetValue(){
+    progressBar.value = 0;
+    song.currentTime = 0;
 }
 
 setInterval(progressValue, 1000);

@@ -33,7 +33,9 @@
                         <div class="popular_song_track">
                             <div class="popular_song_wrapper">
                                 <div class="popular_song_img_container">
-                                    <img src="<%= song.cover %>" alt="popular_song_img" class="popular_song_img">
+                                    <a href="/song/<%= song._id %>">
+                                        <img src="<%= song.cover %>" alt="popular_song_img" class="popular_song_img">
+                                    </a>
                                 </div>
                                 <ul class="popular_song">
                                     <a href="/song/<%= song._id %>" class="popular_song_name"><%= song.name %></a>
@@ -58,7 +60,9 @@
                         <div class="album_container">
                             <div class="album">
                                 <div class="album_img_container">
-                                    <img src="<%= album.cover %>" alt="album_img" class="album_img">
+                                    <a href="/album/<%= album._id %>">
+                                        <img src="<%= album.cover %>" alt="album_img" class="album_img">
+                                    </a>
                                 </div>
                             </div>
                             <a href="/album/<%= album._id %>" class="album_name"><%= album.name %></a>
@@ -84,6 +88,7 @@
                     <% }) %>
                 </div>
             </div>
+            
             <!-- CATEGORY -->
             <div class="container">
                 <a href="/category" class="category_header">

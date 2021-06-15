@@ -73,6 +73,8 @@ body {
     z-index: -100;
 }
 
+
+
 .content_wrapper {
     padding: 0%;
 }
@@ -87,22 +89,25 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+}
 .category_song {
-    flex-basis: 18%;
-    margin: 3%;
+    flex-basis: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 .category_song_img {
-    width: 50%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    width: 60%;
+    height: 100%;
 }
 .category_song_img img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .category_song_name, .category_song_category {
@@ -111,7 +116,6 @@ body {
 .category_song_name {
     font-size: 3vmin;
     color: var(--clr-primary);
-    /* background-color: yellowgreen; */
 }
 .category_song_name:hover {
     color: var(--bg-primary);

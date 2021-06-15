@@ -4,15 +4,28 @@
 <!-- CONTENT -->
 <div class="content">
     <div class="container-fluid artist_header">
-        <div class="artist_img">
-            <img src="<%= artist.image %>" alt="artist_img">
-        </div>
-        <div class="artist_desc">
+            <div class="artist">
+                <div class="artist_img">
+                    <img src="<%= artist.image %>" alt="artist_img">
+                </div>
+            </div>
+            <div class="artist_desc">
             <h2 class="artist_name"><%= artist.name %></h2>
             <% if(songs.length > 1){ %>
                 <p class="artist_total"><%= songs.length %> songs</p>
             <% } else { %>
                 <p class="artist_total"><%= songs.length %> song</p>
+            <% } %>
+            <% if(currentUser){ %>
+                <% if(currentUser.follow.includes(artist._id)){ %>
+                    <form action="/user/artist/<%= artist._id %>/unfollow" method="POST" class="follow_form">
+                        <button type="submit" class="follow_button">Following</button>
+                    </form>
+                <% } else { %>
+                    <form action="/user/artist/<%= artist._id %>/follow" method="POST" class="follow_form">
+                        <button type="submit" class="follow_button">Follow</button>
+                    </form>
+                <% } %>
             <% } %>
         </div>
     </div>

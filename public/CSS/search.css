@@ -66,10 +66,9 @@ body {
 
 /* SORT MENUS */
 .sort_container {
-    width: 20%;
+    width: 30%;
     height: auto;
     margin-top: 10px;
-    /* background-color: brown; */
 }
 .sort_header {
     color: white;
@@ -78,12 +77,10 @@ body {
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    /* background-color: burlywood; */
 }
 .sort_icon {
-    flex-basis: 20%;
+    flex-basis: 15%;
     margin: 10px;
     border: none;
     background: transparent;
@@ -101,7 +98,6 @@ body {
     flex-wrap: wrap;
     height: fit-content;
     min-height: 88vh;
-    /* background-color: brown; */
 }
 
 .search_song_container {
@@ -144,7 +140,6 @@ body {
     flex-basis: 40%;
     height: fit-content;
     min-height: 88vh;
-    /* background-color: green; */
 }
 
 .search_album_container {
@@ -214,6 +209,18 @@ body {
     height: 100%;
     object-fit: cover;
 }
+.more {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgb(62, 62, 255);
+}
+.more_song {
+    margin-left: 80px;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgb(62, 62, 255);
+}
 
 /* SEARCH SONG */
 .search_type_song {
@@ -229,6 +236,7 @@ body {
     padding: 20px;
 }
 .songs {
+    min-height: 35vh;
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -266,6 +274,7 @@ body {
     padding: 20px;
 }
 .albums {
+    min-height: 35vh;
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -276,6 +285,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 .album_img {
     width: 50%;
@@ -308,6 +318,7 @@ body {
     padding: 20px;
 }
 .artists {
+    min-height: 35vh;
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -318,10 +329,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 .artist_img {
     width: 50%;
-    height: auto;
+    height: 100%;
 }
 .artist_img img {
     width: 100%;
@@ -347,35 +359,4 @@ body {
 }
 .hidden {
     display: none;
-}
-
-/*  ========
-     FOOTER 
-    ======== */
-
-.footer {
-    background-color: var(--ft-primary);
-    padding: 1% 5%;
-    display: flex;
-    position: relative;
-    right: 0%;
-    bottom: 0%;
-    left: 0%;
-}
-.footer_topic {
-    columns: 3;
-    column-gap: 10%;
-    width: fit-content;
-    list-style: none;
-    margin-top: 1%;
-    margin-left: 15%;
-}
-.footer_sub_topic {
-    list-style: none;
-}
-
-@media screen and (max-width: 720px){
-    .footer_topic {
-        columns: 1;
-    }
 }

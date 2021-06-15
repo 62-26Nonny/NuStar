@@ -35,7 +35,6 @@ body {
 
 .content {
     min-height: 80vh;
-    /* background-color: hotpink; */
 }
 .membership_header {
     margin-top: 30px;
@@ -51,7 +50,6 @@ body {
     min-height: 50%;
     display: flex;
     justify-content: center;
-    /* background-color: blueviolet; */
 }
 .promotion_link {
     text-decoration: none;

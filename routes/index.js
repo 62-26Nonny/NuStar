@@ -14,11 +14,11 @@ router.get('/', async function(req,res){
 
     var topSongs = await songSchema.find({}).limit(3).populate('artist').sort({favoriteCount: -1});
 
-    var artists = await artistSchema.find({}).limit(5);
+    var artists = await artistSchema.find({}).limit(5).sort({_id: -1});
     
-    var albums = await albumSchema.find({}).limit(4);
+    var albums = await albumSchema.find({}).limit(4).sort({_id: -1});
 
-    var categories = await categorySchema.find({}).limit(5);
+    var categories = await categorySchema.find({}).limit(5).sort({_id: -1});
 
     res.render('home.ejs', {songs: songs, topSongs: topSongs, artists: artists, albums: albums, categories: categories});
 });
@@ -56,7 +56,7 @@ router.post('/sign_in', passport.authenticate('local',
         successFlash: 'Successfully sign in',
         failureFlash: 'Invalid username or email'
     }), function(req, res){
-        if(req.user.privilage === "Admin"){
+        if(req.user.admin){
             res.redirect('/admin/song_management/song');
         } else {
             if(req.query.BackURL){

@@ -4,13 +4,8 @@ var express         = require('express'),
     songSchema      = require('../schemas/song')
 
 router.get('/', async function(req, res){
-    var artists = await artistSchema.find({}, function(err, result){
-        if(err){
-            console.log(err);
-        } else {
-            console.log(result);
-        }
-    });
+    var artists = await artistSchema.find({}).limit(12).sort({followCount: -1});
+    
     res.render('song/artist_all.ejs', {artists: artists});
 });
 
